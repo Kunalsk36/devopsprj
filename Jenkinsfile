@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/kunalsk36/devopsprj.git'
-            }
-        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -14,6 +9,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy using Ansible') {
             steps {
                 script {
