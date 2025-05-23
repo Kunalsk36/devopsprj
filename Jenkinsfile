@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/kunalsk36/devops-blog-static.git'
+                git 'https://github.com/kunalsk36/devopsprj.git'
             }
         }
         stage('Build Docker Image') {
@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy using Ansible') {
             steps {
                 script {
-                    sh 'wsl ansible-playbook /mnt/d/devops-blog/deploy.yml'
+                    sh 'wsl ansible-playbook /home/myansibleprj/deploy.yml'
                 }
             }
         }
