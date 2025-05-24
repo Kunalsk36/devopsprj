@@ -2,21 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t devops-blog .'
             }
         }
 
-        stage('Deploy using Ansible') {
+        stage('Run Docker Container') {
             steps {
-                bat 'wsl ansible-playbook /home/myansibleprj/deploy.yml'
+                bat '''
+                docker rm -f devops-blog || exit 0
+                docker run -d -p 8080:80 --name devops-blog devops-blog
+                '''
             }
         }
     }
